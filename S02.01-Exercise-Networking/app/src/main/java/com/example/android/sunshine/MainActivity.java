@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -58,19 +60,24 @@ public class MainActivity extends AppCompatActivity {
     // TODO (5) Create a class that extends AsyncTask to perform network requests
     // TODO (6) Override the doInBackground method to perform your network requests
     // TODO (7) Override the onPostExecute method to display the results of the network request
-    private class FetchWeatherTask extends AsyncTask<URL, Void, String> {
-        protected String doInBackground(URL... urls) {
+    private class FetchWeatherTask extends AsyncTask<URL, Void, String[]> {
+        protected String[] doInBackground(URL... urls) {
             String response = null;
+            String[] simpleJsonWeatherData = null;
             try {
                 response = getResponseFromHttpUrl(urls[0]);
-            } catch (IOException e) {
+                simpleJsonWeatherData = OpenWeatherJsonUtils
+                        .getSimpleWeatherStringsFromJson(MainActivity.this, response);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            return response;
+            return simpleJsonWeatherData;
         }
 
-        protected void onPostExecute(String result) {
-            mWeatherTextView.setText(result);
+        protected void onPostExecute(String[] result) {
+            for (String weatherString : result) {
+                mWeatherTextView.append((weatherString) + "\n\n\n");
+            }
         }
     }
 }
