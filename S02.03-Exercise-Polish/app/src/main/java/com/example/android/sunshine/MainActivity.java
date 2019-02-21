@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 for (String weatherString : weatherData) {
                     mWeatherTextView.append((weatherString) + "\n\n\n");
                 }
-            }
+            } else
             // TODO (10) If the weather data was null, show the error message
             showErrorMessage();
         }
