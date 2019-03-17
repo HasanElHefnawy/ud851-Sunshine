@@ -351,6 +351,12 @@ public class MainActivity extends AppCompatActivity implements
         // TODO (2) Set setDisplayHomeAsUpEnabled to true on the support ActionBar
 
         // TODO (6) Launch SettingsActivity when the Settings option is clicked
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            intent.putExtra("ParentActivity", "MainActivity");
+            startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
