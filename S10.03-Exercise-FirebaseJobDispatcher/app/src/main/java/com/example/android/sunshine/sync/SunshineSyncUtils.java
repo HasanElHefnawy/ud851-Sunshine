@@ -22,16 +22,33 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.example.android.sunshine.data.WeatherContract;
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.Job;
+import com.firebase.jobdispatcher.Trigger;
 
 public class SunshineSyncUtils {
 
 //  TODO (10) Add constant values to sync Sunshine every 3 - 4 hours
+    private static int startSync = 10800;
+    private static int endSync = 14400;
 
     private static boolean sInitialized;
 
 //  TODO (11) Add a sync tag to identify our sync job
+    private static String syncTag = "our-sync-job";
 
 //  TODO (12) Create a method to schedule our periodic weather sync
+    public static void schedule(Context context) {
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(context));
+        Job myJob = dispatcher.newJobBuilder()
+                .setService(SunshineFirebaseJobService.class)
+                .setTag(syncTag)
+                .setRecurring(true)
+                .setTrigger(Trigger.executionWindow(startSync, endSync))
+                .build();
+        dispatcher.mustSchedule(myJob);
+    }
 
     /**
      * Creates periodic sync tasks and checks to see if an immediate sync is required. If an
@@ -51,6 +68,7 @@ public class SunshineSyncUtils {
         sInitialized = true;
 
 //      TODO (13) Call the method you created to schedule a periodic weather sync
+        schedule(context);
 
         /*
          * We need to check to see if our ContentProvider has data to display in our forecast
