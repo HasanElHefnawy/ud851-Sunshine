@@ -37,5 +37,9 @@
 
     <!-- TODO (11) Add a checkbox preference for enabling and disabling notifications -->
     <!-- TODO (12) Set the default of whether or not to show preferences using bools.xml -->
+    <CheckBoxPreference
+        android:defaultValue="@bool/show_notifications"
+        android:key="show_notifications_key"
+        android:title="Show Notifications" />
 
 </PreferenceScreen>
