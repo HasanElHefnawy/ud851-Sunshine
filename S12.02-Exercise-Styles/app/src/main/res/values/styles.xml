@@ -26,11 +26,30 @@
     </style>
 
     <!-- TODO (1) Create a style that shows a Sunshine logo instead of a title -->
+    <style name="CustomActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:icon">@drawable/ic_logo</item>
+        <item name="logo">@drawable/ic_logo</item>
+        <item name="displayOptions">useLogo|showHome</item>
+    </style>
 
     <!-- TODO (2) Create a style for MainActivity called AppTheme.Forecast that uses our custom ActionBar style -->
+    <style name="AppTheme.Forecast" parent="AppTheme">
+        <item name="actionBarStyle">@style/CustomActionBar</item>
+    </style>
 
     <!-- TODO (3) Create the DetailLabel style -->
+    <style name="DetailLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/detail_accent_label</item>
+    </style>
 
     <!-- TODO (4) Create the ExtraWeatherMeasurement style -->
+    <style name="ExtraWeatherMeasurement">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
 </resources>
