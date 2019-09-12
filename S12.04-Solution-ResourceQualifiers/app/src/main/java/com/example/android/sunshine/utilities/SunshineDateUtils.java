@@ -208,7 +208,7 @@ public final class SunshineDateUtils {
          * that normalized date and produce a date (in UTC time) that represents the local time
          * zone at midnight.
          */
-        long localDate = getLocalMidnightFromNormalizedUtcDate(normalizedUtcMidnight);
+        long localDate = normalizedUtcMidnight;
 
         /*
          * In order to determine which day of the week we are creating a date string for, we need
